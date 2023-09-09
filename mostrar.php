@@ -1,22 +1,23 @@
 <?php //Abrimos php
-	//hacemos la conexion para la base de datos:
-	$conectar=@mysql_connect('localhost', 'root', '');
-	//verificamos la conexion
-	if(!$conectar){
-		echo"No Se Encontro El Servidor";
-	}else{
-		$baseDedatos=@mysql_select_db('prueba');
-	//verificamos la base de datos
-		if(!$baseDedatos){
-			echo"No Se Encontro La Base De Datos";
-		}
-	}
+	$servername = "localhost";
+$database = "prueba";
+$username = "root";
+$password = "password";
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $database);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+else{
+echo "Connected successfully, ";
+}
 	//Se Hace la sentencia sql:
 	$sql="SELECT * FROM datos"; //->Donde * es igual a todos los campos entonces la sentencia seria esta-> seleccionamos todos los campos de la tabla datos
 	//ejecutamos la sentencia de slq:
-	$ejecutar=mysql_query($sql);
+	$ejecutar=mysqli_query($conn,$sql);
 	//traenos todos los valores en un array:
-	$datos=mysql_fetch_array($ejecutar);
+	$datos=mysqli_fetch_array($ejecutar);
 	//imprimimos los datos de manera dinamica
 	echo "<table border='1'>";
 	echo"<tr>";
@@ -29,7 +30,7 @@
 		echo"<td>$datos[1]</td>";
 		echo"<td>$datos[2]</td>";
 		echo"</tr>";
-		$datos=mysql_fetch_array($ejecutar);
+		$datos=mysqli_fetch_array($ejecutar);
 	}
 	echo"</table>";
 ?>
